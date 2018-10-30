@@ -4,7 +4,7 @@ if ($_POST['text'] == "test")
 	"username" => "WooBot",
 	"channel" => $_POST['channel_id'],
 	"response_type" => "in_channel",
-	"text" => "Hello, WooBot here, I'm working!",
+	"text" => "[THIS IS A TEST] Hello, WooBot here, I'm working!",
 	"mrkdwn" => false,
 	"icon_url" => "http://www.gfxmag.com/wp-content/uploads/2016/07/woocommerce-vector-logo.png",
 );

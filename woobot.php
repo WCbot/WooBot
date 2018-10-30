@@ -11,7 +11,7 @@ if ($_POST['text'] == "test") {
 	$response_array = array(
 	"username" => "WooBot",
 	"channel" => $_POST['channel_id'],
-	"response_type" => "ephemeral"
+	"response_type" => "ephemeral",
 	"text" => "Sorry, command not recognised",
 	"mrkdwn" => false,
 );

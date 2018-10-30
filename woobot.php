@@ -4,7 +4,7 @@ if ($_POST['text'] == "test")
 	"username" => "WooBot",
 	"channel" => $_POST['channel_id'],
 	"response_type" => "in_channel",
-	"text" => "Hello, WooBot here, I'm working!",
+	"text" => "Hello, WooBot here, I'm working!" . $_POST['text'],
 	"mrkdwn" => false,
 );
 

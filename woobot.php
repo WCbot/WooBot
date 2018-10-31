@@ -14,7 +14,7 @@ if ($mysignature == $_SERVER['HTTP_X_SLACK_SIGNATURE']) {
 			$dberror = false;
 			$consumerkey = $textarray[1];
 			$consumersecret = $textarray[2];
-			$woo-rl = $textarray[3];
+			$woorl = $textarray[3];
 			$workspaceid = $_POST['team_id'];
 			$exists_query = "SELECT EXISTS(SELECT * FROM users WHERE `workspace-id` = " . $_POST['team_id'] . ");";
 			$exists_query_noselect = "EXISTS(SELECT * FROM users WHERE `workspace-id` = " . $_POST['team_id'] . ");";
@@ -27,14 +27,14 @@ if ($mysignature == $_SERVER['HTTP_X_SLACK_SIGNATURE']) {
 			$exists_result = $exists_result->fetch_assoc();
 			$exists_result = $exists_result[$exists_query_noselect];
 			if ($exists_result == 1) {
-				$update_query = "UPDATE users SET `consumer-key`=" . $consumerkey . ", `consumer-secret`=" . $consumersecret . ", `wc-url`=" . $woo-rl . " WHERE `workspace-id` = " . $workspaceid . ";";
+				$update_query = "UPDATE users SET `consumer-key`=" . $consumerkey . ", `consumer-secret`=" . $consumersecret . ", `wc-url`=" . $woorl . " WHERE `workspace-id` = " . $workspaceid . ";";
 				if (!$mysqli->query($update_query)) {
 					header('content-type: text/plain');
 					$dberror = true;
 					echo "Database error";
 				}
 			} else {
-				$set_query = "INSERT INTO users VALUES ('" . $workspaceid . "','" . $consumerkey . "','" . $consumersecret . "','" . $woo-rl . ");";
+				$set_query = "INSERT INTO users VALUES ('" . $workspaceid . "','" . $consumerkey . "','" . $consumersecret . "','" . $woorl . ");";
 				if (!$mysqli->query($set_query)) {
 					header('content-type: text/plain');
 					$dberror = true;

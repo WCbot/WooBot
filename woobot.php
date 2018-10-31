@@ -28,8 +28,8 @@ if ($mysignature == $_SERVER['X-Slack-Signature']) {
 } else {
 	header('content-type: text/plain');
 	echo "Sorry, it doesn't look like this request comes from Slack.";
-	echo $basestring
-	echo $mysignature . ","
-	echo $_SERVER['X-Slack-Signature']
+	echo $basestring . ",";
+	echo $mysignature . ",";
+	echo $_SERVER['X-Slack-Signature'];
 }
 ?>

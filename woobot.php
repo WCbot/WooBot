@@ -22,7 +22,7 @@ if ($mysignature == $_SERVER['HTTP_X_SLACK_SIGNATURE']) {
 			if (!$exists_result = $mysqli->query($exists_query)) {
 				header('content-type: text/plain');
 				$dberror = true;
-				echo "Database error 1";
+				echo "Database error 1" . $mysqli->error;
 			}
 			if ($dberror == true) { die(); }
 			$exists_result = $exists_result->fetch_assoc();

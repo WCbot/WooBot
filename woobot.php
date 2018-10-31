@@ -10,6 +10,7 @@ if ($mysignature == $_SERVER['HTTP_X_SLACK_SIGNATURE']) {
 		if (count($textarray) < 4) {
 			header('content-type: text/plain');
 			echo "Usage: /woobot connect <consumer key> <consumer secret> <woocomerce url>";
+			die();
 		} else {
 			$dberror = false;
 			$consumerkey = $textarray[1];

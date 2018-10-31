@@ -15,11 +15,11 @@ if ($mysignature == $_SERVER['HTTP_X_SLACK_SIGNATURE']) {
 		$response_array = array(
 		"username" => "WooBot",
 		"channel" => $_POST['channel_id'],
-	"response_type" => "ephemeral",
-	"text" => "Sorry, command not recognised",
-	"mrkdwn" => false,
+		"response_type" => "ephemeral",
+		"text" => "Sorry, command not recognised",
+		"mrkdwn" => false,
 	);
-	} 
+	}
 	$response_json = json_encode($response_array);
 	header('content-type: application/json');
 	echo $response_json;

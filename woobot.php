@@ -4,6 +4,7 @@ $basestring = "v0" . ":" . $_SERVER['HTTP_X_SLACK_REQUEST_TIMESTAMP'] . ":" . fi
 $mysignature = "v0=" . hash_hmac("sha256", $basestring, $signingsecret);
 if ($mysignature == $_SERVER['HTTP_X_SLACK_SIGNATURE']) {
 	$textarray = explode(" ", urldecode($POST['text']));
+	echo $textarray[0]
 	if ($textarray[0] == "test") {
 		$response_array = array(
 		"username" => "WooBot",

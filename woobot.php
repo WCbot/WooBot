@@ -19,17 +19,12 @@ if ($mysignature == $_SERVER['HTTP_X_SLACK_SIGNATURE']) {
 	"text" => "Sorry, command not recognised",
 	"mrkdwn" => false,
 	);
-	}
- 
+	} 
 	$response_json = json_encode($response_array);
-
 	header('content-type: application/json');
 	echo $response_json;
 } else {
 	header('content-type: text/plain');
 	echo "Sorry, it doesn't look like this request comes from Slack.";
-	echo $basestring . ",";
-	echo $mysignature . ",";
-	echo $_SERVER['HTTP_X_SLACK_SIGNATURE'];
 }
 ?>

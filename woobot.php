@@ -30,6 +30,9 @@ if ($mysignature == $_SERVER['X-Slack-Signature']) {
 	echo "Sorry, it doesn't look like this request comes from Slack.";
 	echo $basestring . ",";
 	echo $mysignature . ",";
+	foreach (apache_request_headers() as $header => $value) {
+		echo "$header: $value \n";
+	}
 	echo $_SERVER['X-Slack-Signature'];
 }
 ?>

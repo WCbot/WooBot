@@ -1,8 +1,8 @@
 <?php
 $signingsecret = "d359026511347aa1caffacb200c332a8";
-$basestring = "v0" . ":" . $_SERVER['X-Slack-Request-Timestamp'] . ":" . file_get_contents('php://input');
+$basestring = "v0" . ":" . $_SERVER['X-SLACK-REQUEST-TIMESTAMP'] . ":" . file_get_contents('php://input');
 $mysignature = "v0=" . hash_hmac("sha256", $basestring, $signingsecret);
-if ($mysignature == $_SERVER['X-Slack-Signature']) {
+if ($mysignature == $_SERVER['X-SLACK-SIGNATURE']) {
 	if ($_POST['text'] == "test") {
 		$response_array = array(
 		"username" => "WooBot",
@@ -33,6 +33,6 @@ if ($mysignature == $_SERVER['X-Slack-Signature']) {
 	foreach (apache_request_headers() as $header => $value) {
 		echo "$header: $value \n";
 	}
-	echo $_SERVER['X-Slack-Signature'];
+	echo $_SERVER['X-SLACK-SIGNATURE'];
 }
 ?>

@@ -1,6 +1,6 @@
 <?php
 $signingsecret = "d359026511347aa1caffacb200c332a8";
-$basestring = "v0" . ":" . $_SERVER['X-Slack-Request-Timestamp'] . ":" . http_get_request_body();
+$basestring = "v0" . ":" . $_SERVER['X-Slack-Request-Timestamp'] . ":" . file_get_contents('php://input');
 $mysignature = "v0=" . hash_hmac("sha256", $basestring, $signingsecret);
 if ($mysignature == $_SERVER['X-Slack-Signature']) {
 	if ($_POST['text'] == "test") {

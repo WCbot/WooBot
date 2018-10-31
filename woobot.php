@@ -5,7 +5,7 @@ $mysignature = "v0=" . hash_hmac("sha256", $basestring, $signingsecret);
 if ($mysignature == $_SERVER['HTTP_X_SLACK_SIGNATURE']) {
 	$textarray = explode(" ", urldecode($_POST['text']));
 	$mysqli = new mysqli("localhost", "root", "d[[P=.zOm7ur)QO<BXMewT+$%Lp{Mzhl", "woobot");
-	if ($mysqli->connect_errno) { echo "Database error"; }
+	if ($mysqli->connect_errno) { echo "Database error 0"; }
 	if ($textarray[0] == "connect") {
 		if (count($textarray) < 4) {
 			header('content-type: text/plain');
@@ -22,7 +22,7 @@ if ($mysignature == $_SERVER['HTTP_X_SLACK_SIGNATURE']) {
 			if (!$exists_result = $mysqli->query($exists_query)) {
 				header('content-type: text/plain');
 				$dberror = true;
-				echo "Database error";
+				echo "Database error 1";
 			}
 			if ($dberror == true) { die(); }
 			$exists_result = $exists_result->fetch_assoc();
@@ -32,14 +32,14 @@ if ($mysignature == $_SERVER['HTTP_X_SLACK_SIGNATURE']) {
 				if (!$mysqli->query($update_query)) {
 					header('content-type: text/plain');
 					$dberror = true;
-					echo "Database error";
+					echo "Database error 2";
 				}
 			} else {
 				$set_query = "INSERT INTO users VALUES ('" . $workspaceid . "','" . $consumerkey . "','" . $consumersecret . "','" . $woorl . ");";
 				if (!$mysqli->query($set_query)) {
 					header('content-type: text/plain');
 					$dberror = true;
-					echo "Database error";
+					echo "Database error 3";
 			}
 			if ($dberror == true) {
 				die();

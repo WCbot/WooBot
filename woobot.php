@@ -17,8 +17,8 @@ if ($mysignature == $_SERVER['HTTP_X_SLACK_SIGNATURE']) {
 			$consumersecret = $textarray[2];
 			$woorl = $textarray[3];
 			$workspaceid = $_POST['team_id'];
-			$exists_query = "SELECT EXISTS(SELECT * FROM users WHERE `workspace-id` = " . $_POST['team_id'] . ");";
-			$exists_query_noselect = "EXISTS(SELECT * FROM users WHERE `workspace-id` = " . $_POST['team_id'] . ");";
+			$exists_query = "SELECT EXISTS(SELECT * FROM users WHERE `workspace-id` = '" . $_POST['team_id'] . "');";
+			$exists_query_noselect = "EXISTS(SELECT * FROM users WHERE `workspace-id` = '" . $_POST['team_id'] . "');";
 			if (!$exists_result = $mysqli->query($exists_query)) {
 				header('content-type: text/plain');
 				$dberror = true;

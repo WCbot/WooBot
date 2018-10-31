@@ -4,6 +4,8 @@ $basestring = "v0" . ":" . $_SERVER['HTTP_X_SLACK_REQUEST_TIMESTAMP'] . ":" . fi
 $mysignature = "v0=" . hash_hmac("sha256", $basestring, $signingsecret);
 if ($mysignature == $_SERVER['HTTP_X_SLACK_SIGNATURE']) {
 	$textarray = explode(" ", urldecode($_POST['text']));
+	$mysqli = new mysqli("localhost", "root", "d[[P=.zOm7ur)QO<BXMewT+$%Lp{Mzhl", "woobot");
+	if (mysqli->connect_errno) { echo "Database error"; }
 	if ($textarray[0] == "test") {
 		$response_array = array(
 		"username" => "WooBot",

@@ -35,7 +35,7 @@ if ($mysignature == $_SERVER['HTTP_X_SLACK_SIGNATURE']) {
 					echo "Database error 2";
 				}
 			} else {
-				$set_query = "INSERT INTO users VALUES ('" . $workspaceid . "','" . $consumerkey . "','" . $consumersecret .  "','" . $woorl . "');";
+				$set_query = "INSERT INTO users VALUES ('" . $workspaceid . "','" . $consumerkey . "','" . $consumersecret .  "','" . $woorl . ");";
 				if (!$mysqli->query($set_query)) {
 					header('content-type: text/plain');
 					$dberror = true;
@@ -55,7 +55,7 @@ if ($mysignature == $_SERVER['HTTP_X_SLACK_SIGNATURE']) {
 			}
 		}
 	}
-	if ($textarray[0] == "test") {
+	elseif ($textarray[0] == "test") {
 		$response_array = array(
 		"username" => "WooBot",
 		"channel" => $_POST['channel_id'],

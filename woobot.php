@@ -1,4 +1,10 @@
 <?php
+// WooBot
+// Requires: automattic/woocommerce
+
+require __DIR__ . '/vendor/autoload.php';
+use Automattic\WooCommerce\Client;
+
 $signingsecret = "d359026511347aa1caffacb200c332a8";
 $basestring = "v0" . ":" . $_SERVER['HTTP_X_SLACK_REQUEST_TIMESTAMP'] . ":" . file_get_contents('php://input');
 $mysignature = "v0=" . hash_hmac("sha256", $basestring, $signingsecret);
@@ -55,6 +61,31 @@ if ($mysignature == $_SERVER['HTTP_X_SLACK_SIGNATURE']) {
 				);
 				}
 			}
+		}
+	}
+	elseif ($textarray[0] == "email") {
+		if (count($textarray) != 2) {
+			header('content-type: text/plain');
+			echo "Usage: /woobot email <email address>";
+		} else {
+			$email = $textarray[0];
+			$get_userdata_query = "SELECT * FROM users WHERE `workspace-id` = '" . $_POST['team_id'] . "';";
+			if (!$get_userdata_result = $mysqli->query($get_userdata_query)) {
+				$dberror = true;
+				echo "Database error 4";
+			}
+			if ($dberror == true) { die(); }
+			$get_userdata_result = $get_userdata_result->fetch_assoc();
+			$consumerkey = $get_userdata_result['consumer-key'];
+			$consumersecret = $get_userdata_result['consumer-secret'];
+			$woorl = $get_userdata_result['wc-url'];
+			$woocommerce = new Client($woorl, $consumerkey, $consumersecret, ['wp_api' => true])
+			if (!$response = $woocommerce->get('customers',[id=>$email]))
+				header('content-type: text/plain');
+				echo "WooCommerce error. Check your consumer key, consumer secret and WooCommerce URL are correct.";
+				die();
+			}
+			print_r($response)
 		}
 	}
 	elseif ($textarray[0] == "test") {

@@ -28,6 +28,7 @@ if ($mysignature == $_SERVER['HTTP_X_SLACK_SIGNATURE']) {
 			}
 			if ($dberror == true) { die(); }
 			$exists_result = $exists_result->fetch_assoc();
+			print_r($exists_result);
 			$exists_result = $exists_result[$exists_query_noselect];
 			echo $exists_result;
 			if ($exists_result == 1) {

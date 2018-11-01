@@ -32,7 +32,7 @@ if ($mysignature == $_SERVER['HTTP_X_SLACK_SIGNATURE']) {
 			$exists_result = $exists_result[$exists_query_noselect];
 			echo $exists_result;
 			if ($exists_result == 1) {
-				$update_query = "UPDATE users SET `consumer-key`=" . $consumerkey . ", `consumer-secret`=" . $consumersecret . ", `wc-url`=" . $woorl . " WHERE `workspace-id` = " . $workspaceid . ";";
+				$update_query = "UPDATE users SET `consumer-key`='" . $consumerkey . "', `consumer-secret`='" . $consumersecret . "', `wc-url`='" . $woorl . "' WHERE `workspace-id` = '" . $workspaceid . "';";
 				if (!$mysqli->query($update_query)) {
 					header('content-type: text/plain');
 					$dberror = true;

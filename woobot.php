@@ -48,6 +48,7 @@ if ($mysignature == $_SERVER['HTTP_X_SLACK_SIGNATURE']) {
 					header('content-type: text/plain');
 					$dberror = true;
 					echo "Database error 3 " . $mysqli->error;
+				}
 			}
 			if ($dberror == true) {
 				die();

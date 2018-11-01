@@ -7,7 +7,7 @@ if ($mysignature == $_SERVER['HTTP_X_SLACK_SIGNATURE']) {
 	$mysqli = new mysqli("localhost", "root", "d[[P=.zOm7ur)QO<BXMewT+$%Lp{Mzhl", "woobot");
 	if ($mysqli->connect_errno) { echo "Database error 0"; }
 	if ($textarray[0] == "connect") {
-		if (count($textarray) <= 4) {
+		if (count($textarray) != 4) {
 			header('content-type: text/plain');
 			print_r($textarray);
 			echo "Usage: /woobot connect <consumer key> <consumer secret> <woocomerce url>";

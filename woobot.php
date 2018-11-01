@@ -85,7 +85,7 @@ if ($mysignature == $_SERVER['HTTP_X_SLACK_SIGNATURE']) {
 				echo "WooCommerce error. Check your consumer key, consumer secret and WooCommerce URL are correct.";
 				die();
 			}
-			print_r($response)
+			print_r($response);
 		}
 	}
 	elseif ($textarray[0] == "test") {

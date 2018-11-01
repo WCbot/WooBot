@@ -68,7 +68,7 @@ if ($mysignature == $_SERVER['HTTP_X_SLACK_SIGNATURE']) {
 			header('content-type: text/plain');
 			echo "Usage: /woobot email <email address>";
 		} else {
-			$email = $textarray[0];
+			$email = $textarray[1];
 			$get_userdata_query = "SELECT * FROM users WHERE `workspace-id` = '" . $_POST['team_id'] . "';";
 			if (!$get_userdata_result = $mysqli->query($get_userdata_query)) {
 				$dberror = true;

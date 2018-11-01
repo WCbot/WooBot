@@ -6,9 +6,7 @@ require __DIR__ . '/vendor/autoload.php';
 use Automattic\WooCommerce\Client;
 
 $signingsecret = "d359026511347aa1caffacb200c332a8";
-$basestring = "v0" . ":" . $_SERVER['HTTP_X_SLACK_REQUEST_TIMESwoobot.edapt.org.uk
-woobot.edapt.org.uk
-TAMP'] . ":" . file_get_contents('php://input');
+$basestring = "v0" . ":" . $_SERVER['HTTP_X_SLACK_REQUEST_TIMESTAMP'] . ":" . file_get_contents('php://input');
 $mysignature = "v0=" . hash_hmac("sha256", $basestring, $signingsecret);
 if ($mysignature == $_SERVER['HTTP_X_SLACK_SIGNATURE']) {
 	$textarray = explode(" ", urldecode($_POST['text']));

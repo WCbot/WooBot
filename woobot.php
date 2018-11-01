@@ -31,6 +31,7 @@ if ($mysignature == $_SERVER['HTTP_X_SLACK_SIGNATURE']) {
 				header('content-type: text/plain');
 				$dberror = true;
 				echo "Database error 1" . $mysqli->error;
+				die();
 			}
 			if ($dberror == true) { die(); }
 			$exists_result = $exists_result->fetch_assoc();
@@ -41,6 +42,7 @@ if ($mysignature == $_SERVER['HTTP_X_SLACK_SIGNATURE']) {
 					header('content-type: text/plain');
 					$dberror = true;
 					echo "Database error 2";
+					die();
 				}
 			} else {
 				$set_query = "INSERT INTO users VALUES ('" . $workspaceid . "','" . $consumerkey . "','" . $consumersecret .  "','" . $woorl . "');";
@@ -48,6 +50,7 @@ if ($mysignature == $_SERVER['HTTP_X_SLACK_SIGNATURE']) {
 					header('content-type: text/plain');
 					$dberror = true;
 					echo "Database error 3 " . $mysqli->error;
+					die();
 				}
 			}
 			if ($dberror == true) {
@@ -67,6 +70,7 @@ if ($mysignature == $_SERVER['HTTP_X_SLACK_SIGNATURE']) {
 		if (count($textarray) != 2) {
 			header('content-type: text/plain');
 			echo "Usage: /woobot email <email address>";
+			die();
 		} else {
 			$email = $textarray[1];
 			$get_userdata_query = "SELECT * FROM users WHERE `workspace-id` = '" . $_POST['team_id'] . "';";

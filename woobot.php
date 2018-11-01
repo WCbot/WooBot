@@ -59,7 +59,7 @@ if ($mysignature == $_SERVER['HTTP_X_SLACK_SIGNATURE']) {
 				"text" => "Sucessfully connected!",
 				"mrkdwn" => false,
 				);
-				}
+				
 			}
 		}
 	}

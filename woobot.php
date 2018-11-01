@@ -6,7 +6,9 @@ require __DIR__ . '/vendor/autoload.php';
 use Automattic\WooCommerce\Client;
 
 $signingsecret = "d359026511347aa1caffacb200c332a8";
-$basestring = "v0" . ":" . $_SERVER['HTTP_X_SLACK_REQUEST_TIMESTAMP'] . ":" . file_get_contents('php://input');
+$basestring = "v0" . ":" . $_SERVER['HTTP_X_SLACK_REQUEST_TIMESwoobot.edapt.org.uk
+woobot.edapt.org.uk
+TAMP'] . ":" . file_get_contents('php://input');
 $mysignature = "v0=" . hash_hmac("sha256", $basestring, $signingsecret);
 if ($mysignature == $_SERVER['HTTP_X_SLACK_SIGNATURE']) {
 	$textarray = explode(" ", urldecode($_POST['text']));
@@ -80,7 +82,7 @@ if ($mysignature == $_SERVER['HTTP_X_SLACK_SIGNATURE']) {
 			$consumersecret = $get_userdata_result['consumer-secret'];
 			$woorl = $get_userdata_result['wc-url'];
 			$woocommerce = new Client($woorl, $consumerkey, $consumersecret, array('wp_api' => true, 'version' => 'wc/v3'));
-			if (!$response = $woocommerce->get('customers', array('email'=>$email))) {
+			if (!$response = $woocommerce->get('customers?email=' . $email)) {
 				header('content-type: text/plain');
 				echo "WooCommerce error. Check your consumer key, consumer secret and WooCommerce URL are correct.";
 				die();

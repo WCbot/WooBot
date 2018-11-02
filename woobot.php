@@ -84,9 +84,9 @@ if ($mysignature == $_SERVER['HTTP_X_SLACK_SIGNATURE']) {
 			$consumersecret = $get_userdata_result['consumer-secret'];
 			$woorl = $get_userdata_result['wc-url'];
 			$woocommerce = new Client($woorl, $consumerkey, $consumersecret, array('wp_api' => true, 'version' => 'wc/v3'));
-			if (!$response = $woocommerce->get('customers?email=' . $email)) {
+			if (!$response = $woocommerce->get('customers?email=' . $email . '&role=all')) {
 				header('content-type: text/plain');
-				echo "WooCommerce error. Check your consumer key, consumer secret and WooCommerce URL are correct.";
+				echo "WooCommerce error. Make sure there is a user with the email specified, and check your consumer key, consumer secret and WooCommerce URL are correct.";
 				die();
 			}
 			print_r($response);

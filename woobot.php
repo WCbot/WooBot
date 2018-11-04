@@ -10,20 +10,22 @@ $basestring = "v0" . ":" . $_SERVER['HTTP_X_SLACK_REQUEST_TIMESTAMP'] . ":" . fi
 $mysignature = "v0=" . hash_hmac("sha256", $basestring, $signingsecret);
 if ($mysignature == $_SERVER['HTTP_X_SLACK_SIGNATURE']) {
 	$textarray = explode(" ", urldecode($_POST['text']));
-	$mysqli = new mysqli("localhost", "root", "d[[P=.zOm7ur)QO<BXMewT+$%Lp{Mzhl", "woobot");
+	$mysqli = new mysqli("localhost", "root", "~~~obfuscated~~~", "woobot");
 	if ($mysqli->connect_errno) { echo "Database error 0"; }
 	if ($textarray[0] == "connect") {
-		if (count($textarray) != 4) {
+		if (count($textarray) != 5) {
 			header('content-type: text/plain');
 			print_r($textarray);
 			echo count($textarray);
-			echo "Usage: /woobot connect <consumer key> <consumer secret> <woocomerce url>";
+			echo "Usage: /woobot connect <consumer key> <consumer secret> <woocomerce url> <enable subscriptions>";
 			die();
 		} else {
 			$dberror = false;
 			$consumerkey = $textarray[1];
 			$consumersecret = $textarray[2];
 			$woorl = $textarray[3];
+			$enablesubs = $textarray[4];
+			if ($enablesubs == 1 || $enablesubs == 0) { header('content-type: text/plain'); echo "<enable subscriptions> should be either 0 or 1"; die(); }
 			$workspaceid = $_POST['team_id'];
 			$exists_query = "SELECT EXISTS(SELECT * FROM users WHERE `workspace-id` = '" . $_POST['team_id'] . "');";
 			$exists_query_noselect = "EXISTS(SELECT * FROM users WHERE `workspace-id` = '" . $_POST['team_id'] . "')";
@@ -37,7 +39,7 @@ if ($mysignature == $_SERVER['HTTP_X_SLACK_SIGNATURE']) {
 			$exists_result = $exists_result->fetch_assoc();
 			$exists_result = $exists_result[$exists_query_noselect];
 			if ($exists_result == 1) {
-				$update_query = "UPDATE users SET `consumer-key`='" . $consumerkey . "', `consumer-secret`='" . $consumersecret . "', `wc-url`='" . $woorl . "' WHERE `workspace-id` = '" . $workspaceid . "';";
+				$update_query = "UPDATE users SET `consumer-key`='" . $consumerkey . "', `consumer-secret`='" . $consumersecret . "', `wc-url`='" . $woorl . "', `enable-subs`='" . $enablesubs . "' WHERE `workspace-id` = '" . $workspaceid . "';";
 				if (!$mysqli->query($update_query)) {
 					header('content-type: text/plain');
 					$dberror = true;
@@ -45,7 +47,7 @@ if ($mysignature == $_SERVER['HTTP_X_SLACK_SIGNATURE']) {
 					die();
 				}
 			} else {
-				$set_query = "INSERT INTO users VALUES ('" . $workspaceid . "','" . $consumerkey . "','" . $consumersecret .  "','" . $woorl . "');";
+				$set_query = "INSERT INTO users VALUES ('" . $workspaceid . "','" . $consumerkey . "','" . $consumersecret .  "','" . $woorl . "','" . $enablesubs . "');";
 				if (!$mysqli->query($set_query)) {
 					header('content-type: text/plain');
 					$dberror = true;

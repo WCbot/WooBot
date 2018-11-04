@@ -25,7 +25,7 @@ if ($mysignature == $_SERVER['HTTP_X_SLACK_SIGNATURE']) {
 			$consumersecret = $textarray[2];
 			$woorl = $textarray[3];
 			$enablesubs = $textarray[4];
-			if ($enablesubs == 1 || $enablesubs == 0) { header('content-type: text/plain'); echo "<enable subscriptions> should be either 0 or 1"; die(); }
+			if ($enablesubs != 1 || $enablesubs != 0) { header('content-type: text/plain'); echo "<enable subscriptions> should be either 0 or 1"; die(); }
 			$workspaceid = $_POST['team_id'];
 			$exists_query = "SELECT EXISTS(SELECT * FROM users WHERE `workspace-id` = '" . $_POST['team_id'] . "');";
 			$exists_query_noselect = "EXISTS(SELECT * FROM users WHERE `workspace-id` = '" . $_POST['team_id'] . "')";
